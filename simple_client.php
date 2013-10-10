@@ -6,7 +6,7 @@
  * client example
  */
 
-//the input name has to be input
+// get input
 $echo = $_GET['input'];
 $result = "";
 
