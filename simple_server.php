@@ -4,20 +4,28 @@
  * http://www.ibm.com/developerworks/opensource/tutorials/os-php-webservice/
  * using PHP built-in SoapServer class
  * server example
+ * 2014/04/27
  */
 
 /*
  * This is where the business logic goes
+ * Define a custom function
  */
-function echoo($echo){
+function echo_back($user_input){
 
-    return "This is soap server: you typed ".$echo;
+    return "This is soap server: you typed <b>".$user_input."</b>.";
 }
 
+/*
+ * Initial Sopa server
+ */ 
 $server = new SoapServer(
     null,
-    array('uri' => "urn://tyler/res")
+    // may not need this uri
+    array("uri" => 'http://localhost/soap/server.php')
 );
-$server->addFunction('echoo');
-$server->handle();
+// add the custom function
+$server -> addFunction( 'echo_back' );
+// start service
+$server -> handle();
 ?>
