@@ -22,7 +22,7 @@ function echo_back($user_input){
 $server = new SoapServer(
     null,
     // may not need this uri
-    array("uri" => 'http://localhost/soap/server.php')
+    array( "uri" => 'http://localhost/soap/server.php')
 );
 // add the custom function
 $server -> addFunction( 'echo_back' );
