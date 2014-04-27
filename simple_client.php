@@ -4,24 +4,49 @@
  * http://www.ibm.com/developerworks/opensource/tutorials/os-php-webservice/
  * using PHP built-in SoapClient class
  * client example
+ * 2014/04/27
  */
 
-// get input
-$echo = $_GET['input'];
-$result = "";
+// debug
+ini_set ( 'display_errors', 1 );
+ini_set ( 'display_startup_errors', 1 );
+error_reporting ( -1 );
 
-if($echo != ''){
-    $client = new SoapClient(null, array(
-      'location' => "http://localhost/ws/simple_server.php",
-      'uri'      => "urn://tyler/req"));
+// get input and set 
+if(isset(  $_GET['input'] )){
+    $user_input = $_GET['input'];
+}else{
+    $user_input = "Type something here.";
+}
 
-    $result = $client->
-        __soapCall("echoo",array($echo));
+$SOAPresult = "";
+
+if( $user_input != ""){
+    $client = new SoapClient(
+        null, 
+        array(
+            // where is server is
+            "location" => "http://localhost/ws/simple_server.php",
+            // need a URI if no WSDL is given
+            "uri"=> "http://localhost/ws/simple_client.php"
+        )
+    );
+    // call and get response
+    $SOAPresult = $client->
+        __soapCall( "echo_back", array( $user_input ));
 }
 ?>
-<h2>Echo Web Service</h2>
-<form action='simple_client.php' method='GET'/>
-    <input name='input' value='$echo'/><br/>
-    <input type='Submit' name='submit' value='Send'/>
+<!DOCTYPE html>
+<head>
+    <title>SOAP Client Example</title>
+</head>
+<body>
+<h1>SOAP Client Example</h1>
+<h2>The server will echo back what you typed.</h2>
+<form action = "simple_client.php" method = "GET"/>
+    <input name = "input' value= "<?php echo $user_input?>"><br/>
+    <input type = "Submit" name = "submit" value = "Send"/>
 </form>
-<?php echo $result;?>
+<?php echo $SOAPresult;?>
+</body>
+</html>
