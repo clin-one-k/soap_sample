@@ -44,7 +44,7 @@ if( $user_input != ""){
 <h1>SOAP Client Example</h1>
 <h2>The server will echo back what you typed.</h2>
 <form action = "simple_client.php" method = "GET"/>
-    <input name = "input' value= "<?php echo $user_input?>"><br/>
+    <input name = "input" value= "<?php echo $user_input?>"><br/>
     <input type = "Submit" name = "submit" value = "Send"/>
 </form>
 <?php echo $SOAPresult;?>
